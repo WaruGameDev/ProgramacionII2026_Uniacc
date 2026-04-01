@@ -6,6 +6,9 @@ public class PlayerAnimator : MonoBehaviour
     public Animator animator;
     public Transform visual;
     public MovementCharacter movementCharacter;
+
+
+   
     void Update()
     {
         float horizontal = rb.linearVelocity.x;
