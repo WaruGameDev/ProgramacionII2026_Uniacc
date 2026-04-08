@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public interface IClickable
@@ -37,9 +38,9 @@ public class ClickManager : MonoBehaviour
             Debug.Log("Clicked on: " + hit.collider.name);
             // Check if the hit object has a component that implements IClickable
 
-            IClickable clickable = hit.collider.GetComponent<IClickable>();
+            List<IClickable> clickables = new List<IClickable>(hit.collider.GetComponents<IClickable>());
 
-            if (clickable != null)
+            foreach (var clickable in clickables)
             {
                 clickable.OnClick();
             }

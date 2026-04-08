@@ -24,6 +24,7 @@ public class InventoryManager : MonoBehaviour
             inventoryItems.Add(item);
             Debug.Log("Added to inventory: " + item.itemName);
         }
+        RefreshUI();
     }
     public void RemoveItem(ItemSO item)
     {
@@ -32,9 +33,14 @@ public class InventoryManager : MonoBehaviour
             inventoryItems.Remove(item);
             Debug.Log("Removed from inventory: " + item.itemName);
         }
+        RefreshUI();
     }
     public void RefreshUI()
     {
+        foreach (Transform child in inventoryUIParent)
+        {
+            Destroy(child.gameObject);
+        }
         // Implement UI refresh logic here, e.g., update inventory display
         foreach (var item in inventoryItems)
         {
