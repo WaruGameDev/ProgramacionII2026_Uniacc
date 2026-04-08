@@ -17,6 +17,10 @@ public class InventoryManager : MonoBehaviour
             Instance = this;           
         }
     }
+    void Start()
+    {
+        RefreshUI();
+    }
     public void AddItem(ItemSO item)
     {
         if (!inventoryItems.Contains(item))

@@ -12,6 +12,7 @@ public class ClickManager : MonoBehaviour
 
     void Update()
     {
+        if(PointAndClickManager.Instance.isInteractionVisible) return;
         // Detect mouse click or touch
         if (Input.GetMouseButtonDown(0))
         {

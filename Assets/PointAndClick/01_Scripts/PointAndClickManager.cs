@@ -9,7 +9,7 @@ public class PointAndClickManager : MonoBehaviour
     public static PointAndClickManager Instance { get; private set; }
     public CanvasGroup interactionCanvasGroup;
     public TextMeshProUGUI interactionText;
-    private bool isInteractionVisible = false;
+    public bool isInteractionVisible = false;
     public CinemachineCamera actualCinemachineCamera;
 
     public List<string> actualDialogues = new List<string>();

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a97b8c604de90f4eb652aa95009f304, type: 3}
-  m_Name: Taza
+  m_Name: Pocion
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
-  itemName: Taza
-  itemSprite: {fileID: 6937817954938267909, guid: cf8dfbb7ac99c694a98a31a61f3b3cc5, type: 3}
+  itemName: Pocion
+  itemSprite: {fileID: -6470460504253458178, guid: 1262b4e1c9f1b434795f2898a95fd577, type: 3}
