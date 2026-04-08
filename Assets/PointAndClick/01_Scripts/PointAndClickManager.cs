@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Unity.Cinemachine;
+using System.Collections.Generic;
 
 public class PointAndClickManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class PointAndClickManager : MonoBehaviour
     public TextMeshProUGUI interactionText;
     private bool isInteractionVisible = false;
     public CinemachineCamera actualCinemachineCamera;
+
+    public List<string> actualDialogues = new List<string>();
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -21,6 +24,10 @@ public class PointAndClickManager : MonoBehaviour
             Instance = this;           
         }
     }
+    void Start()
+    {
+        HideInteraction();
+    }
     public void ShowInteraction(string text)
     {
         if(isInteractionVisible) return;
@@ -30,6 +37,34 @@ public class PointAndClickManager : MonoBehaviour
         interactionCanvasGroup.alpha = 1f;
         interactionCanvasGroup.interactable = true;
         interactionCanvasGroup.blocksRaycasts = true;
+    }
+    public void ShowTextInteraction(List<string> textList)
+    {
+        if(isInteractionVisible) return;
+        isInteractionVisible = true;
+        actualDialogues.Clear();
+        actualDialogues.AddRange(textList);
+
+        interactionText.text = actualDialogues[0];
+        interactionCanvasGroup.alpha = 1f;
+        interactionCanvasGroup.interactable = true;
+        interactionCanvasGroup.blocksRaycasts = true;
+    }
+
+    public void NextTextInteraction()
+    {
+        if (actualDialogues.Count == 0) return;
+
+        actualDialogues.RemoveAt(0);
+
+        if (actualDialogues.Count > 0)
+        {
+            interactionText.text = actualDialogues[0];
+        }
+        else
+        {
+            HideInteraction();
+        }
     }
     public void HideInteraction()
     {

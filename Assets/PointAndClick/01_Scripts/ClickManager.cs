@@ -1,5 +1,10 @@
 using UnityEngine;
 
+public interface IClickable
+{
+    void OnClick();
+}
+
 public class ClickManager : MonoBehaviour
 {
     [SerializeField] private LayerMask clickableLayer; // Assign in Inspector to limit detection
@@ -30,6 +35,14 @@ public class ClickManager : MonoBehaviour
         if (hit.collider != null)
         {
             Debug.Log("Clicked on: " + hit.collider.name);
+            // Check if the hit object has a component that implements IClickable
+
+            IClickable clickable = hit.collider.GetComponent<IClickable>();
+
+            if (clickable != null)
+            {
+                clickable.OnClick();
+            }
 
             // Example: Destroy the clicked object
             // Destroy(hit.collider.gameObject);
