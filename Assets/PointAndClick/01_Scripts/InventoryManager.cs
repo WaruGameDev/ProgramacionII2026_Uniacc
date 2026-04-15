@@ -39,6 +39,19 @@ public class InventoryManager : MonoBehaviour
         }
         RefreshUI();
     }
+    public ItemSO GetItem(ItemSO item)
+    {
+        return inventoryItems.Find(i => i == item);
+    }
+    public List<ItemSO> GetAllItems()
+    {
+        return inventoryItems;
+    }
+    public bool HasItem(ItemSO item)
+    {
+        return inventoryItems.Contains(item);
+    }
+   
     public void RefreshUI()
     {
         foreach (Transform child in inventoryUIParent)
