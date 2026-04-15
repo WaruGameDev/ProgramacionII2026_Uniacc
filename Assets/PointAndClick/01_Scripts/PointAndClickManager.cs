@@ -11,12 +11,7 @@ public class DialogueWithEvent
     public string dialogue;
     [Space(10)]
     public UnityEvent onDialogueComplete;
-
-    public DialogueWithEvent(string dialogue, UnityEvent onDialogueComplete = null)
-    {
-        this.dialogue = dialogue;
-        this.onDialogueComplete = onDialogueComplete;
-    }
+    public Sprite characterSprite;
 }
 
 public class PointAndClickManager : MonoBehaviour
@@ -24,10 +19,12 @@ public class PointAndClickManager : MonoBehaviour
     public static PointAndClickManager Instance { get; private set; }
     public CanvasGroup interactionCanvasGroup;
     public TextMeshProUGUI interactionText;
+    public Image characterImage;
     public bool isInteractionVisible = false;
     public CinemachineCamera actualCinemachineCamera;
 
     public List<DialogueWithEvent> actualDialogues = new List<DialogueWithEvent>();
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -62,6 +59,7 @@ public class PointAndClickManager : MonoBehaviour
 
         interactionText.text = actualDialogues[0].dialogue;
         actualDialogues[0].onDialogueComplete?.Invoke();
+        characterImage.sprite = actualDialogues[0].characterSprite;
 
         interactionCanvasGroup.alpha = 1f;
         interactionCanvasGroup.interactable = true;
@@ -78,6 +76,7 @@ public class PointAndClickManager : MonoBehaviour
         {
             interactionText.text = actualDialogues[0].dialogue;
             actualDialogues[0].onDialogueComplete?.Invoke();
+            characterImage.sprite = actualDialogues[0].characterSprite;
         }
         else
         {
