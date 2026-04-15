@@ -119,6 +119,81 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &30445867
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 30445870}
+  - component: {fileID: 30445869}
+  - component: {fileID: 30445868}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &30445868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30445867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 301349a3ba1998c4785fb11cb3771d7f, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 1
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &30445869
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30445867}
+  m_CullTransparentMesh: 1
+--- !u!224 &30445870
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30445867}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1662687907}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 145.92, y: -0.0020447}
+  m_SizeDelta: {x: 291.84, y: 270.95}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &156405488
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,10 +227,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MultipleDialogueInteraction
   dialogues:
-  - dialogue: 
+  - dialogue: Tengo la taza
     onDialogueComplete:
       m_PersistentCalls:
         m_Calls: []
+    characterSprite: {fileID: 0}
+  - dialogue: yuhuu
+    onDialogueComplete:
+      m_PersistentCalls:
+        m_Calls: []
+    characterSprite: {fileID: 0}
 --- !u!114 &156405490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -373,6 +454,7 @@ MonoBehaviour:
     onDialogueComplete:
       m_PersistentCalls:
         m_Calls: []
+    characterSprite: {fileID: 0}
 --- !u!114 &312404683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -540,14 +622,17 @@ MonoBehaviour:
     onDialogueComplete:
       m_PersistentCalls:
         m_Calls: []
+    characterSprite: {fileID: 0}
   - dialogue: 
     onDialogueComplete:
       m_PersistentCalls:
         m_Calls: []
+    characterSprite: {fileID: 0}
   - dialogue: 
     onDialogueComplete:
       m_PersistentCalls:
         m_Calls: []
+    characterSprite: {fileID: 0}
 --- !u!4 &360337875
 Transform:
   m_ObjectHideFlags: 0
@@ -697,8 +782,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -61.054688, y: 0}
-  m_SizeDelta: {x: -222.1094, y: -100}
+  m_AnchoredPosition: {x: 59.8632, y: 0}
+  m_SizeDelta: {x: -463.9451, y: -100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &436554394
 GameObject:
@@ -834,6 +919,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PointAndClickManager
   interactionCanvasGroup: {fileID: 1406425068}
   interactionText: {fileID: 426367755}
+  characterImage: {fileID: 30445868}
   isInteractionVisible: 0
   actualCinemachineCamera: {fileID: 1967780719}
   actualDialogues: []
@@ -1142,10 +1228,12 @@ MonoBehaviour:
     onDialogueComplete:
       m_PersistentCalls:
         m_Calls: []
+    characterSprite: {fileID: 2289376958635052934, guid: f1caf7fd2d4f97d4a814b40153667e6b, type: 3}
   - dialogue: q boneto
     onDialogueComplete:
       m_PersistentCalls:
         m_Calls: []
+    characterSprite: {fileID: 8974660980176225117, guid: f1caf7fd2d4f97d4a814b40153667e6b, type: 3}
   - dialogue: aaaa desaparecio
     onDialogueComplete:
       m_PersistentCalls:
@@ -1162,6 +1250,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    characterSprite: {fileID: 3547998238760559636, guid: f1caf7fd2d4f97d4a814b40153667e6b, type: 3}
 --- !u!1 &821417194
 GameObject:
   m_ObjectHideFlags: 0
@@ -1323,8 +1412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemRequiredInteractable
   requiredItem:
   - {fileID: 11400000, guid: dfe0ad95fdf36b14bb0c57da69782f25, type: 2}
-  - {fileID: 11400000, guid: 6d84336a8f23e6542a53a07ac65905ea, type: 2}
-  consumeItem: 0
+  consumeItem: 1
   onSuccessfulInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -1409,6 +1497,51 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 916981713}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.2998, y: -0.04997, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1008081840
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1008081842}
+  - component: {fileID: 1008081841}
+  m_Layer: 0
+  m_Name: Personajes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1008081841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008081840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35fc4f063fc54294c8dba6bffa2bd9c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Personajes
+  personajes: []
+--- !u!4 &1008081842
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008081840}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.2998, y: -0.04997, z: 0}
@@ -1782,6 +1915,7 @@ RectTransform:
   m_Children:
   - {fileID: 426367757}
   - {fileID: 574652891}
+  - {fileID: 30445870}
   m_Father: {fileID: 1406425064}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2369,3 +2503,4 @@ SceneRoots:
   - {fileID: 1561971627}
   - {fileID: 916981717}
   - {fileID: 360337875}
+  - {fileID: 1008081842}
