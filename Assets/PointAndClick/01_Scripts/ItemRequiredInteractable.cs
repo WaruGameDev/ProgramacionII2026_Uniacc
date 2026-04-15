@@ -4,9 +4,11 @@ using UnityEngine.Events;
 
 public class ItemRequiredInteractable : MonoBehaviour, IClickable
 {
+    [Header("Item Requirements")]
     public List<ItemSO> requiredItem; // The item required to interact with this object
+    [Header("Interaction Settings")]
     public bool consumeItem = false; // Whether the item should be consumed upon interaction
-
+    [Header("Interaction Events")]
     public UnityEvent onSuccessfulInteraction; // Event triggered when interaction is successful
     public UnityEvent onFailedInteraction; // Event triggered when interaction fails
     public void OnClick()

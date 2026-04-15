@@ -3,6 +3,21 @@ using UnityEngine.UI;
 using TMPro;
 using Unity.Cinemachine;
 using System.Collections.Generic;
+using UnityEngine.Events;
+[System.Serializable]
+public class DialogueWithEvent
+{
+    [TextArea(3, 10)]
+    public string dialogue;
+    [Space(10)]
+    public UnityEvent onDialogueComplete;
+
+    public DialogueWithEvent(string dialogue, UnityEvent onDialogueComplete = null)
+    {
+        this.dialogue = dialogue;
+        this.onDialogueComplete = onDialogueComplete;
+    }
+}
 
 public class PointAndClickManager : MonoBehaviour
 {
@@ -12,7 +27,7 @@ public class PointAndClickManager : MonoBehaviour
     public bool isInteractionVisible = false;
     public CinemachineCamera actualCinemachineCamera;
 
-    public List<string> actualDialogues = new List<string>();
+    public List<DialogueWithEvent> actualDialogues = new List<DialogueWithEvent>();
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -38,14 +53,16 @@ public class PointAndClickManager : MonoBehaviour
         interactionCanvasGroup.interactable = true;
         interactionCanvasGroup.blocksRaycasts = true;
     }
-    public void ShowTextInteraction(List<string> textList)
+    public void ShowTextInteraction(List<DialogueWithEvent> dialogueWithEvents)
     {
         if(isInteractionVisible) return;
         isInteractionVisible = true;
         actualDialogues.Clear();
-        actualDialogues.AddRange(textList);
+        actualDialogues.AddRange(dialogueWithEvents);
 
-        interactionText.text = actualDialogues[0];
+        interactionText.text = actualDialogues[0].dialogue;
+        actualDialogues[0].onDialogueComplete?.Invoke();
+
         interactionCanvasGroup.alpha = 1f;
         interactionCanvasGroup.interactable = true;
         interactionCanvasGroup.blocksRaycasts = true;
@@ -59,7 +76,8 @@ public class PointAndClickManager : MonoBehaviour
 
         if (actualDialogues.Count > 0)
         {
-            interactionText.text = actualDialogues[0];
+            interactionText.text = actualDialogues[0].dialogue;
+            actualDialogues[0].onDialogueComplete?.Invoke();
         }
         else
         {

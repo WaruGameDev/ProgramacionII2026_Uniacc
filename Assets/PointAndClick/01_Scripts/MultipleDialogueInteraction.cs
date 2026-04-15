@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
 
 public class MultipleDialogueInteraction : MonoBehaviour, IClickable
 {
-    public List<string> dialogues = new List<string>();
+    public List<DialogueWithEvent> dialogues = new List<DialogueWithEvent>();
 
     public void OnClick()
     {
