@@ -24,6 +24,11 @@ public class Unit : MonoBehaviour
         defense = unitData.defense;
         speed = unitData.speed;
         spriteRenderer.sprite = unitData.unitSprite;
+        if(!data.isPlayerUnit)     
+        {
+            // Set enemy unit specific properties (e.g., color, layer)
+            spriteRenderer.transform.localScale = new Vector3(-1, 1, 1); // Flip sprite for enemy
+        }
     }
 
     void Start()

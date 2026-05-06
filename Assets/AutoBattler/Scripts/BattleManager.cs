@@ -6,6 +6,12 @@ public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance { get; private set; }
 
+    public List<UnitData> playerUnitDataList = new List<UnitData>();
+    public List<UnitData> enemyUnitDataList = new List<UnitData>();
+    public List<Transform> playerUnitsParent = new List<Transform>();
+    public List<Transform> enemyUnitsParent = new List<Transform>();
+    public GameObject unitPrefab;
+
     public List<Unit> playerUnits = new List<Unit>();
     public List<Unit> enemyUnits = new List<Unit>();
     public List<Unit> turnOrder = new List<Unit>();
@@ -26,6 +32,28 @@ public class BattleManager : MonoBehaviour
     }
     void Start()
     {
+        // Initialize player units
+        for (int i = 0; i < playerUnitDataList.Count; i++)
+        {
+            UnitData data = playerUnitDataList[i];
+            Transform parent = playerUnitsParent[i];
+            GameObject unitObj = Instantiate(unitPrefab, parent);
+            Unit unit = unitObj.GetComponent<Unit>();
+            unit.Initialize(data);
+            playerUnits.Add(unit);
+        }
+        // Initialize enemy units
+        for (int i = 0; i < enemyUnitDataList.Count; i++)     
+        {
+            UnitData data = enemyUnitDataList[i];
+            Transform parent = enemyUnitsParent[i];
+            GameObject unitObj = Instantiate(unitPrefab, parent);
+            Unit unit = unitObj.GetComponent<Unit>();
+            unit.Initialize(data);
+            enemyUnits.Add(unit);
+        }
+
+
         StartBattle();
     }
     public void StartBattle()
