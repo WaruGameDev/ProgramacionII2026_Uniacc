@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
+   
     public float maxHealth = 100f;
     public float currentHealth;
     public float attackDamage = 10f;
@@ -12,9 +13,22 @@ public class Unit : MonoBehaviour
     public Transform frontPoint;
     Tween damageTween;
     public Image healthBarFill;
+    public UnitData data;
+    public SpriteRenderer spriteRenderer;
+
+    public void Initialize(UnitData unitData)
+    {
+        data = unitData;
+        maxHealth = unitData.maxHealth;
+        attackDamage = unitData.attackDamage;
+        defense = unitData.defense;
+        speed = unitData.speed;
+        spriteRenderer.sprite = unitData.unitSprite;
+    }
 
     void Start()
     {
+        Initialize(data);
         damageTween = transform.DOPunchScale(new Vector3(.2f,- .2f, .2f), 0.2f).SetAutoKill(false).Pause();
         currentHealth = maxHealth;
     }
