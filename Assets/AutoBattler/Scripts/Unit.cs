@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Unit : MonoBehaviour
     public float speed = 1f;
     public Transform frontPoint;
     Tween damageTween;
+    public Image healthBarFill;
 
     void Start()
     {
@@ -32,7 +34,7 @@ public class Unit : MonoBehaviour
     public void TakeDamage(float damage)
     {
         float effectiveDamage = Mathf.Max(damage - defense, 0);
-        
+        healthBarFill.fillAmount = (currentHealth - effectiveDamage) / maxHealth;        
         currentHealth -= effectiveDamage;
         if (currentHealth <= 0)
         {
