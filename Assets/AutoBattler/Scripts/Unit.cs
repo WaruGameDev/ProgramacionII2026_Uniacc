@@ -32,11 +32,15 @@ public class Unit : MonoBehaviour
     public void TakeDamage(float damage)
     {
         float effectiveDamage = Mathf.Max(damage - defense, 0);
-        damageTween.Restart();
+        
         currentHealth -= effectiveDamage;
         if (currentHealth <= 0)
         {
             Die();
+        }
+        else
+        {
+            damageTween.Restart();
         }
     }
     void Die()

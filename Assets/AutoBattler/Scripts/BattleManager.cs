@@ -1,12 +1,15 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 
 public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance { get; private set; }
-    public Unit playerUnit;
-    public Unit enemyUnit;
-    int turnCounter = 0;
+
+    public List<Unit> playerUnits = new List<Unit>();
+    public List<Unit> enemyUnits = new List<Unit>();
+    public List<Unit> turnOrder = new List<Unit>();
+    
     private void Awake()
     {
         if (Instance == null)
@@ -14,34 +17,71 @@ public class BattleManager : MonoBehaviour
             Instance = this;
         }        
     }
+    private void SortTurnOrder()
+    {
+        turnOrder.Clear();
+        turnOrder.AddRange(playerUnits);
+        turnOrder.AddRange(enemyUnits);
+        turnOrder.Sort((a, b) => b.speed.CompareTo(a.speed));
+    }
     void Start()
     {
-        NextTurn();
+        StartBattle();
     }
-
-    public void NextTurn()
+    public void StartBattle()
     {
-        // Implement turn logic here (e.g., decide who attacks next)
-        if(turnCounter % 2 == 0)
-        {
-            playerUnit.Attack(enemyUnit, NextTurn);
-        }
-        else
-        {
-            enemyUnit.Attack(playerUnit, NextTurn);
-        }
-        turnCounter++;
+        SortTurnOrder();
+        BattleLoop();
+    }    
 
-    }
-    void Update()
+    public void BattleLoop()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(playerUnits.Count > 0 && enemyUnits.Count > 0 )
         {
-            playerUnit.Attack(enemyUnit);
-        }
-        if(Input.GetKeyDown(KeyCode.Return))
-        {
-            enemyUnit.Attack(playerUnit);
+            if(turnOrder.Count > 0)
+            {
+                ProcessTurn();
+            }
+            else
+            {
+                StartBattle();
+            }
+           
+            
         }
     }
+    void ProcessTurn()
+    {
+            Unit currentUnit = turnOrder[0];
+            if (playerUnits.Contains(currentUnit))
+            {
+                // Player unit's turn
+                Unit target = enemyUnits[Random.Range(0, enemyUnits.Count)];
+                currentUnit.Attack(target, () =>
+                {
+                    if (target.currentHealth <= 0)
+                    {
+                        enemyUnits.Remove(target);
+                        turnOrder.Remove(target);
+                    }
+                    turnOrder.RemoveAt(0);
+                    BattleLoop();
+                });
+            }
+            else
+            {
+                // Enemy unit's turn
+                Unit target = playerUnits[Random.Range(0, playerUnits.Count)];
+                currentUnit.Attack(target, () =>
+                {
+                    if (target.currentHealth <= 0)
+                    {
+                        playerUnits.Remove(target);
+                        turnOrder.Remove(target);
+                    }
+                    turnOrder.RemoveAt(0);
+                    BattleLoop();
+                });
+            }}
+   
 }
