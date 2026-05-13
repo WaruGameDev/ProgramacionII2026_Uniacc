@@ -153,18 +153,62 @@ public class BattleManager : MonoBehaviour
             }
             else
             {
+                Unit target = null;
                 // Enemy unit's turn
-                Unit target = playerUnits[Random.Range(0, playerUnits.Count)];
-                currentUnit.Attack(target, () =>
+                switch(currentUnit.unitType)
                 {
-                    if (target.currentHealth <= 0)
-                    {
-                        playerUnits.Remove(target);
-                        turnOrder.Remove(target);
-                    }
-                    turnOrder.RemoveAt(0);
-                    BattleLoop();
-                });
+                    case UnitType.AtacaUnidadMasFuerte:
+                        target = GetStrongerUnit(playerUnits);
+                        currentUnit.Attack(target, () =>
+                        {
+                            if (target.currentHealth <= 0)
+                            {
+                                playerUnits.Remove(target);
+                                turnOrder.Remove(target);
+                            }
+                            turnOrder.RemoveAt(0);
+                            BattleLoop();
+                        });
+                        break;
+                    case UnitType.AtacaUnidadMasDebil:
+                        target = GetWeakerUnit(playerUnits);
+                        currentUnit.Attack(target, () =>
+                        {
+                            if (target.currentHealth <= 0)
+                            {
+                                playerUnits.Remove(target);
+                                turnOrder.Remove(target);
+                            }
+                            turnOrder.RemoveAt(0);
+                            BattleLoop();
+                        });
+                        break;
+                    case UnitType.AtacaUnidadAleatoria:
+                        target = GetRandomUnit(playerUnits);
+                        currentUnit.Attack(target, () =>
+                        {
+                            if (target.currentHealth <= 0)
+                            {
+                                playerUnits.Remove(target);
+                                turnOrder.Remove(target);
+                            }
+                            turnOrder.RemoveAt(0);
+                            BattleLoop();
+                        });
+                        break;
+                    case UnitType.SanaUnidadMasDebil:
+                        target = GetWeakerUnit(enemyUnits);
+                        target.TakeDamage(-currentUnit.attackDamage); // Heal by using negative damage
+                        turnOrder.RemoveAt(0);
+                        BattleLoop();
+                        break;
+                    case UnitType.SanaUnidadAleatoria:
+                        target = GetRandomUnit(enemyUnits);
+                        target.TakeDamage(-currentUnit.attackDamage); // Heal by using negative damage
+                        turnOrder.RemoveAt(0);
+                        BattleLoop();
+                        break;
+                }
             }
     }
 
