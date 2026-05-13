@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e48666ea5305e304983639c8859639ea, type: 3}
   m_Name: Example 1
   m_EditorClassIdentifier: Assembly-CSharp::UnitData
-  unitName: Example
-  maxHealth: 100
+  unitType: 3
+  unitName: Example2
+  maxHealth: 250
   attackDamage: 10
   defense: 5
   speed: 1

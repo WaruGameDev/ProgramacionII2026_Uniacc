@@ -253,6 +253,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1395547747}
   - component: {fileID: 1395547746}
+  - component: {fileID: 1395547748}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: Untagged
@@ -274,12 +275,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BattleManager
   playerUnitDataList:
   - {fileID: 11400000, guid: 4b12bdbbbb76e914aad5d720a21cf7e7, type: 2}
+  - {fileID: 11400000, guid: c86046a06b3d36945a22d1aa647e019e, type: 2}
   - {fileID: 11400000, guid: 4b12bdbbbb76e914aad5d720a21cf7e7, type: 2}
-  - {fileID: 11400000, guid: 4b12bdbbbb76e914aad5d720a21cf7e7, type: 2}
-  enemyUnitDataList:
-  - {fileID: 11400000, guid: 9a84c09fe6bc4924fbdd9dbcb786fa71, type: 2}
-  - {fileID: 11400000, guid: 9a84c09fe6bc4924fbdd9dbcb786fa71, type: 2}
-  - {fileID: 11400000, guid: 9a84c09fe6bc4924fbdd9dbcb786fa71, type: 2}
   playerUnitsParent:
   - {fileID: 1474320442}
   - {fileID: 2065290735}
@@ -292,6 +289,7 @@ MonoBehaviour:
   playerUnits: []
   enemyUnits: []
   turnOrder: []
+  damageTextPrefab: {fileID: 2959376014203443011, guid: f3faa2bbe9d6d4c49b12640c25853e45, type: 3}
 --- !u!4 &1395547747
 Transform:
   m_ObjectHideFlags: 0
@@ -307,6 +305,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1395547748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1395547745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab8cf1a851113b4d8887e720bf3923d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DungeonManager
+  dungeonEvents:
+  - {fileID: 11400000, guid: 6bec8d6eefce9cb4ca29755ded5ce3a7, type: 2}
+  - {fileID: 11400000, guid: 47e29b8be906efb45a901a8b2a91c70a, type: 2}
+  - {fileID: 11400000, guid: 47e29b8be906efb45a901a8b2a91c70a, type: 2}
 --- !u!1 &1474320441
 GameObject:
   m_ObjectHideFlags: 0

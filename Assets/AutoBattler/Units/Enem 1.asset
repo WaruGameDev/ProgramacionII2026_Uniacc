@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitData
   unitType: 2
   unitName: Junaito
-  maxHealth: 50
+  maxHealth: 20
   attackDamage: 20
   defense: 5
   speed: 1

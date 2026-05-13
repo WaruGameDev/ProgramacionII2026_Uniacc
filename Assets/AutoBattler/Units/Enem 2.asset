@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitData
   unitType: 1
   unitName: Diego
-  maxHealth: 150
+  maxHealth: 10
   attackDamage: 5
   defense: 5
   speed: 1

@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e48666ea5305e304983639c8859639ea, type: 3}
   m_Name: Enem
   m_EditorClassIdentifier: Assembly-CSharp::UnitData
+  unitType: 0
   unitName: pedro
-  maxHealth: 100
+  maxHealth: 1
   attackDamage: 10
   defense: 5
   speed: 1
