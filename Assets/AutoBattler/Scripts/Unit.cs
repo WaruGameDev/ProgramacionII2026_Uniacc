@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using TMPro;
 
 public class Unit : MonoBehaviour
 {
@@ -54,7 +55,29 @@ public class Unit : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
-        float effectiveDamage = Mathf.Max(damage - defense, 0);
+        float effectiveDamage;
+        GameObject damageTextObj = Instantiate(BattleManager.Instance.damageTextPrefab, 
+            transform.position + new Vector3(0,2,0), Quaternion.identity);
+        TextMeshPro damageText = damageTextObj.GetComponent<TextMeshPro>();
+        damageTextObj.transform.DOJump(damageTextObj.transform.position, 1f, 1, 0.5f).
+            SetEase(Ease.OutQuad).OnComplete(() =>
+        {
+            Destroy(damageTextObj);
+        });
+        if(damage >= 0)
+        {
+            effectiveDamage = Mathf.Max(damage - defense, 0);           
+            damageText.text = effectiveDamage.ToString("0");
+            damageText.color = Color.red;
+        }
+        else
+        {
+            effectiveDamage = damage; // Healing is not reduced by defense
+            damageText.text = effectiveDamage.ToString("0");
+            damageText.color = Color.green;
+        }
+
+        
         healthBarFill.fillAmount = (currentHealth - effectiveDamage) / maxHealth;        
         currentHealth -= effectiveDamage;
         if (currentHealth <= 0)

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public enum UnitType
 {
@@ -25,6 +26,8 @@ public class BattleManager : MonoBehaviour
     public List<Unit> playerUnits = new List<Unit>();
     public List<Unit> enemyUnits = new List<Unit>();
     public List<Unit> turnOrder = new List<Unit>();
+
+    public GameObject damageTextPrefab;
     
     private void Awake()
     {
@@ -139,7 +142,9 @@ public class BattleManager : MonoBehaviour
                     case UnitType.SanaUnidadMasDebil:
                          target = GetWeakerUnit(playerUnits);
                          target.TakeDamage(-currentUnit.attackDamage); // Heal by using negative damage
+                         
                          turnOrder.RemoveAt(0);
+
                          BattleLoop();
                         break;
                     case UnitType.SanaUnidadAleatoria:
