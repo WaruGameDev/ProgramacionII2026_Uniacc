@@ -18,7 +18,7 @@ public class BattleManager : MonoBehaviour
     public static BattleManager Instance { get; private set; }
 
     public List<UnitData> playerUnitDataList = new List<UnitData>();
-    public List<UnitData> enemyUnitDataList = new List<UnitData>();
+    //public List<UnitData> enemyUnitDataList = new List<UnitData>();
     public List<Transform> playerUnitsParent = new List<Transform>();
     public List<Transform> enemyUnitsParent = new List<Transform>();
     public GameObject unitPrefab;
@@ -43,10 +43,10 @@ public class BattleManager : MonoBehaviour
         turnOrder.AddRange(enemyUnits);
         turnOrder.Sort((a, b) => b.speed.CompareTo(a.speed));
     }
-    void Start()
+    
+    public void GeneratePlayerUnits()
     {
-        // Initialize player units
-        for (int i = 0; i < playerUnitDataList.Count; i++)
+        for(int i = 0; i < playerUnitDataList.Count; i++)
         {
             UnitData data = playerUnitDataList[i];
             Transform parent = playerUnitsParent[i];
@@ -55,8 +55,23 @@ public class BattleManager : MonoBehaviour
             unit.Initialize(data);
             playerUnits.Add(unit);
         }
-        // Initialize enemy units
-        for (int i = 0; i < enemyUnitDataList.Count; i++)     
+        
+    }
+    public void StartBattle(CombatEvent combatEvent)
+    {
+        GeneratePlayerUnits();
+        GenerateEnemyUnits(combatEvent.enemyUnitsData);
+        SortTurnOrder();
+        BattleLoop();
+    }
+    public void ContinueBattle()
+    {
+        SortTurnOrder();
+        BattleLoop();
+    }
+    public void GenerateEnemyUnits(List<UnitData> enemyUnitDataList)
+    {
+        for(int i = 0; i < enemyUnitDataList.Count; i++)
         {
             UnitData data = enemyUnitDataList[i];
             Transform parent = enemyUnitsParent[i];
@@ -65,15 +80,9 @@ public class BattleManager : MonoBehaviour
             unit.Initialize(data);
             enemyUnits.Add(unit);
         }
-
-
-        StartBattle();
+        
     }
-    public void StartBattle()
-    {
-        SortTurnOrder();
-        BattleLoop();
-    }    
+
 
     public void BattleLoop()
     {
@@ -85,7 +94,7 @@ public class BattleManager : MonoBehaviour
             }
             else
             {
-                StartBattle();
+                ContinueBattle();
             }
            
             
