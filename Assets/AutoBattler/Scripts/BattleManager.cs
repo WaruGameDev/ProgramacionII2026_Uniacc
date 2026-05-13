@@ -59,13 +59,13 @@ public class BattleManager : MonoBehaviour
     }
     public void StartBattle(CombatEvent combatEvent)
     {
-        GeneratePlayerUnits();
+        //GeneratePlayerUnits();
         GenerateEnemyUnits(combatEvent.enemyUnitsData);
         SortTurnOrder();
         BattleLoop();
     }
     public void ContinueBattle()
-    {
+    {        
         SortTurnOrder();
         BattleLoop();
     }
@@ -95,9 +95,22 @@ public class BattleManager : MonoBehaviour
             else
             {
                 ContinueBattle();
-            }
-           
+            }          
             
+        }
+        else
+        {
+            if(playerUnits.Count == 0)
+            {
+                Debug.Log("Player Defeated!");
+            }
+            else
+            {
+                Debug.Log("Player Victorious!");
+                Debug.Log("Player Wins!");
+                DungeonManager.Instance.ContinueDungeon();
+                return;
+            }
         }
     }
     void ProcessTurn()

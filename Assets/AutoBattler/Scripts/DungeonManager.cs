@@ -18,12 +18,13 @@ public class DungeonManager : MonoBehaviour
     }
     public void StartDungeon()
     {
-        if (dungeonEvents.Count > 0)
+        BattleManager.Instance.GeneratePlayerUnits();
+         if (dungeonEvents.Count > 0)
         {
             DungeonEvent currentEvent = dungeonEvents[0];
             currentEvent.TriggerEvent();
             dungeonEvents.RemoveAt(0);
-        }
+        }        
     }
     public void ContinueDungeon()
     {
