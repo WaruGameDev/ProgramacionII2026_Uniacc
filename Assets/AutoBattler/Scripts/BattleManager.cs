@@ -1,6 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum UnitType
+{
+    AtacaUnidadMasFuerte,
+    AtacaUnidadMasDebil,
+    AtacaUnidadAleatoria,
+    SanaUnidadMasDebil,
+    SanaUnidadAleatoria   
+
+}
+
 
 public class BattleManager : MonoBehaviour
 {
@@ -83,18 +93,63 @@ public class BattleManager : MonoBehaviour
             Unit currentUnit = turnOrder[0];
             if (playerUnits.Contains(currentUnit))
             {
+                Unit target = null;
                 // Player unit's turn
-                Unit target = enemyUnits[Random.Range(0, enemyUnits.Count)];
-                currentUnit.Attack(target, () =>
+                switch(currentUnit.unitType)
                 {
-                    if (target.currentHealth <= 0)
-                    {
-                        enemyUnits.Remove(target);
-                        turnOrder.Remove(target);
-                    }
-                    turnOrder.RemoveAt(0);
-                    BattleLoop();
-                });
+                    case UnitType.AtacaUnidadMasFuerte:
+                        target = GetStrongerUnit(enemyUnits);
+                        currentUnit.Attack(target, () =>
+                        {
+                            if (target.currentHealth <= 0)
+                            {
+                                enemyUnits.Remove(target);
+                                turnOrder.Remove(target);
+                            }
+                            turnOrder.RemoveAt(0);
+                            BattleLoop();
+                        });
+                        break;
+                    case UnitType.AtacaUnidadMasDebil:
+                        target = GetWeakerUnit(enemyUnits);
+                        currentUnit.Attack(target, () =>
+                        {
+                            if (target.currentHealth <= 0)
+                            {
+                                enemyUnits.Remove(target);
+                                turnOrder.Remove(target);
+                            }
+                            turnOrder.RemoveAt(0);
+                            BattleLoop();
+                        });
+                        break;
+                    case UnitType.AtacaUnidadAleatoria:
+                        target = GetRandomUnit(enemyUnits);
+                        currentUnit.Attack(target, () =>
+                        {
+                            if (target.currentHealth <= 0)
+                            {
+                                enemyUnits.Remove(target);
+                                turnOrder.Remove(target);
+                            }
+                            turnOrder.RemoveAt(0);
+                            BattleLoop();
+                        });
+                        break;
+                    case UnitType.SanaUnidadMasDebil:
+                         target = GetWeakerUnit(playerUnits);
+                         target.TakeDamage(-currentUnit.attackDamage); // Heal by using negative damage
+                         turnOrder.RemoveAt(0);
+                         BattleLoop();
+                        break;
+                    case UnitType.SanaUnidadAleatoria:
+                         target = GetRandomUnit(playerUnits);
+                         target.TakeDamage(-currentUnit.attackDamage); // Heal by using negative damage
+                         turnOrder.RemoveAt(0);
+                         BattleLoop();
+                        break;
+                }
+
             }
             else
             {
@@ -110,6 +165,45 @@ public class BattleManager : MonoBehaviour
                     turnOrder.RemoveAt(0);
                     BattleLoop();
                 });
-            }}
+            }
+    }
+
+    public Unit GetWeakerUnit(List<Unit> units)
+    {
+        Unit weakerUnit = null;
+        float lowestHealth = float.MaxValue;
+
+        foreach (Unit unit in units)
+        {
+            if (unit.currentHealth < lowestHealth)
+            {
+                lowestHealth = unit.currentHealth;
+                weakerUnit = unit;
+            }
+        }
+
+        return weakerUnit;
+    }
+    public Unit GetStrongerUnit(List<Unit> units)
+    {
+        Unit strongerUnit = null;
+        float highestHealth = float.MinValue;
+
+        foreach (Unit unit in units)
+        {
+            if (unit.currentHealth > highestHealth)
+            {
+                highestHealth = unit.currentHealth;
+                strongerUnit = unit;
+            }
+        }
+
+        return strongerUnit;
+    }
+    public Unit GetRandomUnit(List<Unit> units)
+    {
+        if (units.Count == 0) return null;
+        return units[Random.Range(0, units.Count)];
+    }
    
 }

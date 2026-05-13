@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
+    public UnitType unitType;
    
     public float maxHealth = 100f;
     public float currentHealth;
@@ -24,6 +25,7 @@ public class Unit : MonoBehaviour
         defense = unitData.defense;
         speed = unitData.speed;
         spriteRenderer.sprite = unitData.unitSprite;
+        unitType = unitData.unitType;
         if(!data.isPlayerUnit)     
         {
             // Set enemy unit specific properties (e.g., color, layer)
